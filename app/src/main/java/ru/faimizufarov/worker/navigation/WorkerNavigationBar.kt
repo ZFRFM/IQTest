@@ -15,11 +15,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import ru.faimizufarov.core.theme.WorkerTheme
 
 @Composable
-fun WorkerNavigationBar(navController: NavController) {
+fun WorkerNavigationBar(
+    navController: NavController
+) {
     val navigationBarItems = listOf(
         BottomNavItem.MainScreen,
         BottomNavItem.VacancyScreen,
@@ -30,7 +35,10 @@ fun WorkerNavigationBar(navController: NavController) {
     Column(modifier = Modifier) {
         HorizontalDivider(color = Color(0xFFC4C7C8), thickness = 1.dp)
 
-        NavigationBar(modifier = Modifier) {
+        NavigationBar(
+            modifier = Modifier,
+            containerColor = Color.White
+        ) {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = navBackStackEntry?.destination?.route
 
@@ -74,5 +82,12 @@ fun WorkerNavigationBar(navController: NavController) {
             }
         }
     }
+}
 
+@Preview
+@Composable
+fun PreviewWorkerNavigationBar() {
+    WorkerTheme {
+        WorkerNavigationBar(rememberNavController())
+    }
 }
