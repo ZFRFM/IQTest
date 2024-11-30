@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import ru.faimizufarov.worker.navigation.WorkerNavigationBar
-import ru.faimizufarov.worker.ui.theme.WorkerTheme
+import ru.faimizufarov.core.theme.WorkerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

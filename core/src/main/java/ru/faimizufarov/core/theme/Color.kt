@@ -1,4 +1,4 @@
-package ru.faimizufarov.worker.ui.theme
+package ru.faimizufarov.core.theme
 
 import androidx.compose.ui.graphics.Color
 
