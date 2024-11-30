@@ -5,6 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.faimizufarov.hiring.HiringScreen
+import ru.faimizufarov.main.MainScreen
+import ru.faimizufarov.meeting.MeetingScreen
+import ru.faimizufarov.vacancy.screens.VacancyScreen
 
 @Composable
 fun WorkerNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
@@ -14,19 +18,19 @@ fun WorkerNavHost(navController: NavHostController, modifier: Modifier = Modifie
         modifier = modifier
     ) {
         composable(BottomNavItem.MainScreen.screenRoute) {
-            TODO("Main screen")
+            MainScreen()
         }
 
         composable(BottomNavItem.VacancyScreen.screenRoute) {
-            TODO("Vacancy screen")
+            VacancyScreen()
         }
 
         composable(BottomNavItem.HiringScreen.screenRoute) {
-            TODO("Hiring screen")
+            HiringScreen()
         }
 
         composable(BottomNavItem.MeetingScreen.screenRoute) {
-            TODO("Meeting screen")
+            MeetingScreen()
         }
     }
 }
