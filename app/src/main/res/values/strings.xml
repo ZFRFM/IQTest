@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Worker</string>
+    <string name="main">Главная</string>
+    <string name="vacancy">Вакансии</string>
+    <string name="hiring">Планы найма</string>
+    <string name="meeting">Встречи</string>
 </resources>
