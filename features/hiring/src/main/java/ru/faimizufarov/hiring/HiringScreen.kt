@@ -24,7 +24,7 @@ fun HiringScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(ru.faimizufarov.core.R.string.empty_screen_text),
+            text = stringResource(ru.faimizufarov.core.R.string.empty_hiring_screen_text),
             textAlign = TextAlign.Center,
         )
     }

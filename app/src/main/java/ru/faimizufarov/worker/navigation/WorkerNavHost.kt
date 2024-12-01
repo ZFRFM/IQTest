@@ -19,6 +19,7 @@ fun WorkerNavHost(navController: NavHostController, modifier: Modifier = Modifie
     ) {
         composable(BottomNavItem.MainScreen.screenRoute) {
             MainScreen()
+
         }
 
         composable(BottomNavItem.VacancyScreen.screenRoute) {
