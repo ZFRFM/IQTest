@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+    implementation(project(path = ":domain"))
+
     //region Coroutine
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
