@@ -13,3 +13,10 @@ kotlin {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
+
+dependencies {
+    //region Coroutine
+    implementation(libs.kotlinx.coroutines.core.v164)
+    implementation(libs.kotlinx.coroutines.android)
+    //endregion
+}
