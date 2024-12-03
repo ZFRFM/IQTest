@@ -13,10 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.faimizufarov.core.theme.WorkerTheme
+import ru.faimizufarov.vacancy.models.VacancyCompose
 
 @Composable
 internal fun VacancyItem(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    vacancy: VacancyCompose
 ) {
     Card(modifier = Modifier) {
         Column(
@@ -26,7 +28,7 @@ internal fun VacancyItem(
             )
         ) {
             Text(
-                text = "Фрезеровщик",
+                text = vacancy.vacancyName,
                 color = Color(0xFF282828)
             )
             Row(
@@ -42,7 +44,7 @@ internal fun VacancyItem(
                     color = Color.Gray
                 )
                 Text(
-                    text = "10.10.2024",
+                    text = vacancy.createdAt,
                     modifier = Modifier
                         .padding(vertical = 4.dp),
                     color = Color(0xFF1D1B20)
@@ -60,7 +62,7 @@ internal fun VacancyItem(
                     color = Color.Gray
                 )
                 Text(
-                    text = "Не указано",
+                    text = vacancy.employerName,
                     modifier = Modifier
                         .padding(vertical = 4.dp),
                     color = Color(0xFF1D1B20)
@@ -78,7 +80,7 @@ internal fun VacancyItem(
                     color = Color.Gray
                 )
                 Text(
-                    text = "Убрать, если не указано",
+                    text = vacancy.salary,
                     modifier = Modifier
                         .padding(vertical = 4.dp),
                     color = Color(0xFF1D1B20)
@@ -97,7 +99,7 @@ internal fun VacancyItem(
                     color = Color.Gray
                 )
                 Text(
-                    text = "Не указано",
+                    text = vacancy.area,
                     modifier = Modifier
                         .padding(vertical = 4.dp),
                     color = Color(0xFF1D1B20)
@@ -111,6 +113,15 @@ internal fun VacancyItem(
 @Composable
 fun PreviewVacancyItem() {
     WorkerTheme {
-        VacancyItem()
+        VacancyItem(
+            modifier = Modifier,
+            vacancy = VacancyCompose(
+                vacancyName = "Android",
+                createdAt = "03.12.2024",
+                employerName = "IQ Group",
+                salary = "Не указано",
+                area = "Тольятти"
+            )
+        )
     }
 }

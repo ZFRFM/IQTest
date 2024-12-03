@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class VacancyResponse(
     val id: String,
     @JsonProperty("name")
-    val vacancyResponse: String,
+    val vacancyName: String,
     @JsonProperty("created_at")
     val createdAt: String,
     val employer: Employer?,

@@ -2,7 +2,7 @@ package ru.faimizufarov.domain.models
 
 data class Vacancy(
     val id: String,
-    val vacancyResponse: String,
+    val vacancyName: String,
     val createdAt: String,
     val employer: Employer?,
     val salary: Salary?,

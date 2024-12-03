@@ -12,7 +12,7 @@ import ru.faimizufarov.vacancy.models.VacancyResponse
 internal fun VacancyResponse.toVacancy() =
     Vacancy(
         id = id,
-        vacancyResponse = vacancyResponse,
+        vacancyName = vacancyName,
         createdAt = createdAt,
         employer = employer?.toDomainEmployer(),
         salary = salary?.toDomainSalary(),
