@@ -85,11 +85,16 @@ dependencies {
     //endregion
 
     //region Kotlin Datetime
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+    implementation(libs.kotlinx.datetime)
     //endregion
 
     //region JavaX
     implementation(libs.javax.inject)
+    //endregion
+
+    //region Paging3
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.runtime)
     //endregion
 
     testImplementation(libs.junit)

@@ -1,11 +1,13 @@
 package ru.faimizufarov.worker.vacancy.screens
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -20,16 +22,14 @@ class VacancyViewModel
     @Inject constructor(
         private val vacancyRepository: VacancyRepository
     ): ViewModel() {
-    private val _vacanciesLiveData = MutableLiveData<List<VacancyCompose>>()
-    val vacanciesLiveData: LiveData<List<VacancyCompose>> = _vacanciesLiveData
-
-    fun retrieveData() {
-        viewModelScope.launch {
-            _vacanciesLiveData.value = vacancyRepository.getVacanciesList().map { vacancyResponse ->
-                vacancyResponse.toVacancyCompose()
-            }
-        }
-    }
+        val vacanciesFlow: Flow<PagingData<VacancyCompose>> =
+            vacancyRepository.getVacanciesFlow()
+                .map { pagingData ->
+                    pagingData.map { vacancyResponse ->
+                        vacancyResponse.toVacancyCompose()
+                    }
+                }
+                .cachedIn(viewModelScope)
 
     private fun VacancyResponse.toVacancyCompose() = VacancyCompose(
         vacancyName = vacancyName,

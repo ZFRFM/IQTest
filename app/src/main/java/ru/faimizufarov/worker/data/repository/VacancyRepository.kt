@@ -1,17 +1,24 @@
 package ru.faimizufarov.worker.data.repository
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
 import ru.faimizufarov.worker.data.models.VacancyResponse
 import ru.faimizufarov.worker.data.network.AppApi
+import ru.faimizufarov.worker.data.paging.VacancyPagingSource
 
 class VacancyRepository {
     private val api = AppApi.retrofitService
 
-    suspend fun getVacanciesList(): List<VacancyResponse> =
-        withContext(Dispatchers.IO) {
-            getVacanciesFromApi()
-        }
-
-    private suspend fun getVacanciesFromApi() = api.getResult().vacancies
+    fun getVacanciesFlow(): Flow<PagingData<VacancyResponse>> =
+        Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                prefetchDistance = 5,
+                initialLoadSize = 10,
+                enablePlaceholders = true
+            ),
+            pagingSourceFactory = { VacancyPagingSource(api) }
+        ).flow
 }

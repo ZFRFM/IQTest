@@ -4,19 +4,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import ru.faimizufarov.worker.vacancy.components.VacancyScreenBase
 import ru.faimizufarov.worker.vacancy.components.VacancySearchBar
 
 @Composable
 fun VacancyScreen(vacancyViewModel: VacancyViewModel = hiltViewModel()) {
-    vacancyViewModel.retrieveData()
-    val vacanciesList = vacancyViewModel.vacanciesLiveData.observeAsState(emptyList())
+    val vacancies = vacancyViewModel.vacanciesFlow.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
@@ -27,7 +26,7 @@ fun VacancyScreen(vacancyViewModel: VacancyViewModel = hiltViewModel()) {
         VacancySearchBar()
 
         VacancyScreenBase(
-            vacanciesList = vacanciesList.value
+            vacanciesList = vacancies
         )
     }
 }

@@ -23,7 +23,8 @@ internal fun VacancyItem(
         Column(
             modifier = Modifier.padding(
                 top = 20.dp,
-                start = 16.dp
+                start = 16.dp,
+                end = 16.dp
             )
         ) {
 
