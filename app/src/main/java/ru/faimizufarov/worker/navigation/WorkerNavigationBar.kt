@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import ru.faimizufarov.core.theme.WorkerTheme
+import ru.faimizufarov.worker.theme.WorkerTheme
 
 @Composable
 fun WorkerNavigationBar(

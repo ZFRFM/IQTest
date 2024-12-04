@@ -4,8 +4,8 @@ import dagger.Provides
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.faimizufarov.domain.repository.VacancyRepository
-import ru.faimizufarov.domain.usecase.GetVacanciesUseCase
+import ru.faimizufarov.worker.domain.repository.VacancyRepository
+import ru.faimizufarov.worker.domain.usecase.GetVacanciesUseCase
 import javax.inject.Singleton
 
 @EntryPoint

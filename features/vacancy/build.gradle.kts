@@ -35,9 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(project(path = ":core"))
-    implementation(project(path = ":domain"))
-    implementation(project(":data:vacancy"))
 
     implementation(libs.hilt.android.v2500)
     kapt(libs.hilt.compiler)

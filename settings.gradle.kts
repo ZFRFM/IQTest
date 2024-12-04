@@ -21,10 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Worker"
 include(":app")
-include(":features:main")
-include(":features:vacancy")
-include(":features:hiring")
-include(":features:meeting")
-include(":data:vacancy")
-include(":core")
-include(":domain")

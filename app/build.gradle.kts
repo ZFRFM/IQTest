@@ -42,13 +42,6 @@ android {
 }
 
 dependencies {
-    implementation(project(path = ":data:vacancy"))
-    implementation(project(path = ":domain"))
-    implementation(project(path = ":features:hiring"))
-    implementation(project(path = ":features:main"))
-    implementation(project(path = ":features:meeting"))
-    implementation(project(path = ":features:vacancy"))
-    implementation(project(path = ":core"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -61,10 +54,35 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
 
-    //region Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    //region ArchComponent
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.runtime.livedata)
     //endregion
+
+    //region Coroutine
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    //endregion
+
+    //region Retrofit
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.adapter.rxjava3)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.jackson.module.kotlin)
+    implementation(libs.converter.jackson)
+    //endregion
+
+    //region Hilt
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.android.v2500)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
+    //endregion
+
+    implementation(libs.javax.inject)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
