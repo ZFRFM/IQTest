@@ -4,8 +4,6 @@
     <string name="vacancy">Вакансии</string>
     <string name="hiring">Планы найма</string>
     <string name="meeting">Встречи</string>
-    <string name="empty_hiring_screen_text">Экран планов найма за рамками тестового задания</string>
-    <string name="empty_main_screen_text">Главный экран за рамками тестового задания</string>
-    <string name="empty_meeting_screen_text">Экран встреч за рамками тестового задания</string>
+    <string name="empty_screen_text">Экран за рамками тестового задания</string>
     <string name="vacancies">Вакансии</string>
 </resources>

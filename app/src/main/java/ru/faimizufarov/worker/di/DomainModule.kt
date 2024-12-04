@@ -1,16 +1,16 @@
 package ru.faimizufarov.worker.di
 
+import dagger.Module
 import dagger.Provides
-import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.faimizufarov.worker.domain.repository.VacancyRepository
 import ru.faimizufarov.worker.domain.usecase.GetVacanciesUseCase
 import javax.inject.Singleton
 
-@EntryPoint
+@Module
 @InstallIn(SingletonComponent::class)
-interface DomainModule {
+class DomainModule {
     @Provides
     @Singleton
     fun provideGetVacanciesUseCase(vacancyRepository: VacancyRepository) =

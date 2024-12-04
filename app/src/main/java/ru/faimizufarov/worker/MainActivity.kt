@@ -16,8 +16,8 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.faimizufarov.worker.navigation.WorkerNavigationBar
 import ru.faimizufarov.worker.theme.WorkerTheme
-import ru.faimizufarov.worker.features.vacancy.components.VacancyFloatingActionButton
-import ru.faimizufarov.worker.features.vacancy.components.VacancyTopAppBar
+import ru.faimizufarov.worker.vacancy.components.VacancyFloatingActionButton
+import ru.faimizufarov.worker.vacancy.components.VacancyTopAppBar
 import ru.faimizufarov.worker.navigation.BottomNavItem
 import ru.faimizufarov.worker.navigation.WorkerNavHost
 

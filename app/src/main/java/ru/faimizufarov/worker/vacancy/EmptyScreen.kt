@@ -1,4 +1,4 @@
-package ru.faimizufarov.worker.features.meeting
+package ru.faimizufarov.worker.vacancy
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import ru.faimizufarov.worker.R
 
 @Composable
-fun MeetingScreen() {
+fun EmptyScreen() {
     Column(
         modifier = Modifier
             .background(Color(0xFFFFFFFF))
@@ -24,7 +24,7 @@ fun MeetingScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.empty_meeting_screen_text),
+            text = stringResource(R.string.empty_screen_text),
             textAlign = TextAlign.Center,
         )
     }
@@ -32,8 +32,8 @@ fun MeetingScreen() {
 
 @Preview
 @Composable
-fun PreviewHiringScreen() {
+fun PreviewEmptyScreen() {
     ru.faimizufarov.worker.theme.WorkerTheme {
-        MeetingScreen()
+        EmptyScreen()
     }
 }
