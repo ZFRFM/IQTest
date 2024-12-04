@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.faimizufarov.core.theme.WorkerTheme
 import ru.faimizufarov.domain.models.Vacancy
 import ru.faimizufarov.vacancy.components.VacancyScreenBase
@@ -17,8 +17,7 @@ import ru.faimizufarov.vacancy.components.VacancySearchBar
 import ru.faimizufarov.vacancy.models.VacancyCompose
 
 @Composable
-fun VacancyScreen() {
-    val vacanciesViewModel: VacancyViewModel = viewModel()
+fun VacancyScreen(vacanciesViewModel: VacancyViewModel = hiltViewModel()) {
     val vacanciesList = vacanciesViewModel.vacanciesLiveData.observeAsState(emptyList())
 
     Column(

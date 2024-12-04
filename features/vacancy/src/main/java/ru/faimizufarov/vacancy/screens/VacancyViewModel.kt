@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.faimizufarov.domain.models.Vacancy
 import ru.faimizufarov.domain.usecase.GetVacanciesUseCase
+import javax.inject.Inject
 
-class VacancyViewModel(
-    private val getVacanciesUseCase: GetVacanciesUseCase
-): ViewModel() {
+class VacancyViewModel
+    @Inject constructor(
+        private val getVacanciesUseCase: GetVacanciesUseCase
+    ): ViewModel() {
     private val _vacanciesLiveData = MutableLiveData<List<Vacancy>>()
     val vacanciesLiveData: LiveData<List<Vacancy>> = _vacanciesLiveData
 
