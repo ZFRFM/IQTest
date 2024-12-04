@@ -80,11 +80,17 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.hilt.android)
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
     //endregion
 
+    //region Kotlin Datetime
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+    //endregion
+
+    //region JavaX
     implementation(libs.javax.inject)
+    //endregion
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
