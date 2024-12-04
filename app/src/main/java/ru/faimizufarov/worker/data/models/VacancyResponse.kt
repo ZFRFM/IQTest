@@ -1,7 +1,9 @@
 package ru.faimizufarov.worker.data.models
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class VacancyResponse(
     val id: String,
     @JsonProperty("name")

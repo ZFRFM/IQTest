@@ -1,7 +1,7 @@
 package ru.faimizufarov.worker.di
 
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.faimizufarov.worker.data.repository.VacancyRepository
@@ -9,10 +9,8 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataModule {
-    @Binds
+class DataModule {
+    @Provides
     @Singleton
-    abstract fun provideVacancyRepository(
-        vacancyRepository: VacancyRepository
-    )
+    fun provideVacancyRepository() = VacancyRepository()
 }

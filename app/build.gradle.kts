@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -39,9 +39,10 @@ android {
     buildFeatures {
         compose = true
     }
-    kapt {
-        correctErrorTypes = true
-    }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -69,7 +70,6 @@ dependencies {
 
     //region Retrofit
     implementation(libs.retrofit2.kotlinx.serialization.converter)
-    implementation(libs.adapter.rxjava3)
     implementation(libs.retrofit)
     implementation(libs.okhttp)
     implementation(libs.jackson.module.kotlin)
@@ -77,14 +77,11 @@ dependencies {
     //endregion
 
     //region Hilt
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.android.v2500)
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.hilt.compiler)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.android)
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    kapt(libs.hilt.compiler)
     //endregion
 
     implementation(libs.javax.inject)
