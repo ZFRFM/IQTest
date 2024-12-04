@@ -17,7 +17,8 @@ import ru.faimizufarov.vacancy.components.VacancySearchBar
 import ru.faimizufarov.vacancy.models.VacancyCompose
 
 @Composable
-fun VacancyScreen(vacanciesViewModel: VacancyViewModel = hiltViewModel()) {
+fun VacancyScreen() {
+    val vacanciesViewModel = hiltViewModel<VacancyViewModel>()
     val vacanciesList = vacanciesViewModel.vacanciesLiveData.observeAsState(emptyList())
 
     Column(

@@ -32,6 +32,7 @@ android {
 
 dependencies {
     implementation(project(path = ":domain"))
+    implementation(project(path = ":core"))
 
     //region Coroutine
     implementation(libs.kotlinx.coroutines.core)
@@ -45,10 +46,10 @@ dependencies {
     //endregion
 
     //region Retrofit
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.adapter.rxjava3)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
     implementation(libs.jackson.module.kotlin)
     implementation(libs.converter.jackson)
     //endregion

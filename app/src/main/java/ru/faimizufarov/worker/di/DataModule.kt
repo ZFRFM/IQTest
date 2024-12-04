@@ -1,17 +1,19 @@
-package ru.faimizufarov.vacancy.di
+package ru.faimizufarov.worker.di
 
-import dagger.Module
-import dagger.Provides
+import dagger.Binds
+import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.faimizufarov.domain.repository.VacancyRepository
 import ru.faimizufarov.vacancy.repository.VacancyRepositoryImpl
 import javax.inject.Singleton
 
-@Module
+@EntryPoint
 @InstallIn(SingletonComponent::class)
-class DataModule {
-    @Provides
+abstract class DataModule {
+    @Binds
     @Singleton
-    fun provideVacancyRepository(): VacancyRepository = VacancyRepositoryImpl()
+    abstract fun provideVacancyRepository(
+        vacancyRepositoryImpl: VacancyRepositoryImpl
+    ): VacancyRepository
 }

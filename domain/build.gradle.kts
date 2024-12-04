@@ -19,4 +19,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core.v164)
     implementation(libs.kotlinx.coroutines.android)
     //endregion
+
+    implementation(libs.javax.inject)
 }

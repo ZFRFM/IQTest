@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.faimizufarov.domain.models.Vacancy
 import ru.faimizufarov.domain.usecase.GetVacanciesUseCase
 import javax.inject.Inject
 
+@HiltViewModel
 class VacancyViewModel
     @Inject constructor(
         private val getVacanciesUseCase: GetVacanciesUseCase
