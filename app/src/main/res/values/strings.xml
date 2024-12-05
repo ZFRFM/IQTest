@@ -6,4 +6,6 @@
     <string name="meeting">Встречи</string>
     <string name="empty_screen_text">Экран за рамками тестового задания</string>
     <string name="vacancies">Вакансии</string>
+    <string name="filters">Фильтры</string>
+    <string name="clear">Очистить</string>
 </resources>
