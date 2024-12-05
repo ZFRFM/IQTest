@@ -10,7 +10,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -24,6 +24,7 @@ import ru.faimizufarov.worker.data.models.VacancyResponse
 import ru.faimizufarov.worker.data.repository.VacancyRepository
 import ru.faimizufarov.worker.vacancy.models.Filters
 import ru.faimizufarov.worker.vacancy.models.VacancyCompose
+import ru.faimizufarov.worker.vacancy.models.VacancySorter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,10 +34,18 @@ class VacancyViewModel
     ): ViewModel() {
 
     private val _searchText = MutableStateFlow<String?>(null)
-    val searchText: StateFlow<String?> = _searchText
+    val searchText = _searchText.asStateFlow()
 
     private val _filters = MutableStateFlow(Filters())
-    val filters: StateFlow<Filters> = _filters
+    val filters = _filters.asStateFlow()
+
+    private val _vacancySorter = MutableStateFlow<VacancySorter>(VacancySorter.RelevanceSort)
+    val vacancySorter = _vacancySorter.asStateFlow()
+
+    fun setVacancySorter(vacancySorter: VacancySorter) {
+        _vacancySorter.value = vacancySorter
+
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val vacanciesFlow: Flow<PagingData<VacancyCompose>> =

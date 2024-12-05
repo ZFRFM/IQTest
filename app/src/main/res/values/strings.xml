@@ -8,4 +8,5 @@
     <string name="vacancies">Вакансии</string>
     <string name="filters">Фильтры</string>
     <string name="clear">Очистить</string>
+    <string name="sorting">Сортировка</string>
 </resources>
