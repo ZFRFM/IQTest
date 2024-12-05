@@ -97,6 +97,10 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
     //endregion
 
+    //region Pull to Refresh
+    implementation("eu.bambooapps:compose-material3-pullrefresh:1.1.1")
+    //endregion
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

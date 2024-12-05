@@ -14,9 +14,9 @@ class VacancyRepository {
     fun getVacanciesFlow(): Flow<PagingData<VacancyResponse>> =
         Pager(
             config = PagingConfig(
-                pageSize = 10,
-                prefetchDistance = 5,
-                initialLoadSize = 10,
+                pageSize = 8,
+                prefetchDistance = 2,
+                initialLoadSize = 8,
                 enablePlaceholders = true
             ),
             pagingSourceFactory = { VacancyPagingSource(api) }
