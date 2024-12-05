@@ -2,16 +2,21 @@ package ru.faimizufarov.worker.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import kotlinx.coroutines.flow.Flow
-import ru.faimizufarov.worker.data.models.VacancyResponse
 import ru.faimizufarov.worker.data.network.AppApi
 import ru.faimizufarov.worker.data.paging.VacancyPagingSource
 
 class VacancyRepository {
     private val api = AppApi.retrofitService
 
-    fun getVacanciesFlow(searchText: String?): Flow<PagingData<VacancyResponse>> =
+    suspend fun getFilters() = api.getFilters()
+
+    fun getVacanciesFlow(
+        searchText: String?,
+        experience: String?,
+        employment: String?,
+        schedule: String?,
+        workFormat: String?
+    ) =
         Pager(
             config = PagingConfig(
                 pageSize = 8,
@@ -22,7 +27,11 @@ class VacancyRepository {
             pagingSourceFactory = {
                 VacancyPagingSource(
                     appApiInterface = api,
-                    searchText = searchText
+                    searchText = searchText,
+                    experience = experience,
+                    employment = employment,
+                    schedule = schedule,
+                    workFormat = workFormat
                 )
             }
         ).flow

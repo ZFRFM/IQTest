@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -21,6 +22,7 @@ import kotlinx.datetime.toLocalDateTime
 import ru.faimizufarov.worker.data.models.Salary
 import ru.faimizufarov.worker.data.models.VacancyResponse
 import ru.faimizufarov.worker.data.repository.VacancyRepository
+import ru.faimizufarov.worker.vacancy.models.Filters
 import ru.faimizufarov.worker.vacancy.models.VacancyCompose
 import javax.inject.Inject
 
@@ -29,26 +31,42 @@ class VacancyViewModel
     @Inject constructor(
         private val vacancyRepository: VacancyRepository
     ): ViewModel() {
+
     private val _searchText = MutableStateFlow<String?>(null)
     val searchText: StateFlow<String?> = _searchText
 
+    private val _filters = MutableStateFlow(Filters())
+    val filters: StateFlow<Filters> = _filters
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val vacanciesFlow: Flow<PagingData<VacancyCompose>> =
-        _searchText
-            .flatMapLatest { searchText ->
-                vacancyRepository.getVacanciesFlow(searchText = searchText)
+        combine(_searchText, _filters) { localSearchText, localFilters ->
+            Pair(localSearchText, localFilters)
+        }.flatMapLatest { (localSearchText, localFilters) ->
+            vacancyRepository.getVacanciesFlow(
+                searchText = localSearchText,
+                experience = localFilters.experience,
+                employment = localFilters.employment,
+                schedule = localFilters.schedule,
+                workFormat = localFilters.workFormat
+            )
+        }.map { pagingData ->
+            pagingData.map { vacancyResponse ->
+                vacancyResponse.toVacancyCompose()
             }
-            .map { pagingData ->
-                pagingData.map { vacancyResponse ->
-                    vacancyResponse.toVacancyCompose()
-                }
-            }
+        }
             .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
             .cachedIn(viewModelScope)
 
     fun updateSearchText(text: String) {
         viewModelScope.launch {
             _searchText.value = text
+        }
+    }
+
+    fun updateFilters(newFilters: Filters) {
+        viewModelScope.launch {
+            _filters.value = newFilters
         }
     }
 

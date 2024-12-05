@@ -7,7 +7,11 @@ import ru.faimizufarov.worker.data.network.AppApiInterface
 
 class VacancyPagingSource(
     private val appApiInterface: AppApiInterface,
-    private val searchText: String?
+    private val searchText: String?,
+    private val experience: String?,
+    private val employment: String?,
+    private val schedule: String?,
+    private val workFormat: String?,
 ): PagingSource<Int, VacancyResponse>() {
     override fun getRefreshKey(state: PagingState<Int, VacancyResponse>) =
         state.anchorPosition?.let { position ->
@@ -21,7 +25,11 @@ class VacancyPagingSource(
             val response = appApiInterface.getResult(
                 text = searchText,
                 page = currentPage,
-                perPage = params.loadSize
+                perPage = params.loadSize,
+                experience = experience,
+                employment = employment,
+                schedule = schedule,
+                workFormat = workFormat
             )
             val vacancies = response.vacancies
 
