@@ -14,7 +14,8 @@ interface AppApiInterface {
         @Query("experience") experience: String? = null,
         @Query("employment") employment: String? = null,
         @Query("schedule") schedule: String? = null,
-        @Query("work_format") workFormat: String? = null
+        @Query("work_format") workFormat: String? = null,
+        @Query("order_by") orderBy: String
     ): ResultResponse
 
     @GET("dictionaries")

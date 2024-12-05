@@ -42,22 +42,22 @@ class VacancyViewModel
     private val _vacancySorter = MutableStateFlow<VacancySorter>(VacancySorter.RelevanceSort)
     val vacancySorter = _vacancySorter.asStateFlow()
 
-    fun setVacancySorter(vacancySorter: VacancySorter) {
-        _vacancySorter.value = vacancySorter
-
-    }
-
     @OptIn(ExperimentalCoroutinesApi::class)
     val vacanciesFlow: Flow<PagingData<VacancyCompose>> =
-        combine(_searchText, _filters) { localSearchText, localFilters ->
-            Pair(localSearchText, localFilters)
-        }.flatMapLatest { (localSearchText, localFilters) ->
+        combine(
+            _searchText,
+            _filters,
+            _vacancySorter
+        ) { localSearchText, localFilters, localVacancySorter ->
+            Triple(localSearchText, localFilters, localVacancySorter)
+        }.flatMapLatest { (localSearchText, localFilters, localVacancySorter) ->
             vacancyRepository.getVacanciesFlow(
                 searchText = localSearchText,
                 experience = localFilters.experience,
                 employment = localFilters.employment,
                 schedule = localFilters.schedule,
-                workFormat = localFilters.workFormat
+                workFormat = localFilters.workFormat,
+                vacancySorter = localVacancySorter
             )
         }.map { pagingData ->
             pagingData.map { vacancyResponse ->
@@ -76,6 +76,12 @@ class VacancyViewModel
     fun updateFilters(newFilters: Filters) {
         viewModelScope.launch {
             _filters.value = newFilters
+        }
+    }
+
+    fun updateVacancySorter(vacancySorter: VacancySorter) {
+        viewModelScope.launch {
+            _vacancySorter.value = vacancySorter
         }
     }
 

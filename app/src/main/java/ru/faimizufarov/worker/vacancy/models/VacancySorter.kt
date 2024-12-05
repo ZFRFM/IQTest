@@ -6,11 +6,11 @@ sealed class VacancySorter(
 ) {
     data object RelevanceSort: VacancySorter(
         id = "relevance",
-        sorterName = "по соответствию"
+        sorterName = "По соответствию"
     )
 
     data object DateSort: VacancySorter(
         id = "publication_time",
-        sorterName = "по дате"
+        sorterName = "По дате публикации"
     )
 }

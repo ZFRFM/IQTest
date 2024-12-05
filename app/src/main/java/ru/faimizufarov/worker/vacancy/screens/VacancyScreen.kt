@@ -49,7 +49,7 @@ fun VacancyScreen(
             SortDialog(
                 currentVacancySorter = vacancySorter,
                 onVacancySorterChange = { vacancySorter ->
-                    vacancyViewModel.setVacancySorter(vacancySorter)
+                    vacancyViewModel.updateVacancySorter(vacancySorter)
                     isSortDialogVisible = false
                 },
                 onDismissRequest = { isSortDialogVisible = false }

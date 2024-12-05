@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import ru.faimizufarov.worker.data.network.AppApi
 import ru.faimizufarov.worker.data.paging.VacancyPagingSource
+import ru.faimizufarov.worker.vacancy.models.VacancySorter
 
 class VacancyRepository {
     private val api = AppApi.retrofitService
@@ -15,7 +16,8 @@ class VacancyRepository {
         experience: String?,
         employment: String?,
         schedule: String?,
-        workFormat: String?
+        workFormat: String?,
+        vacancySorter: VacancySorter
     ) =
         Pager(
             config = PagingConfig(
@@ -31,7 +33,8 @@ class VacancyRepository {
                     experience = experience,
                     employment = employment,
                     schedule = schedule,
-                    workFormat = workFormat
+                    workFormat = workFormat,
+                    vacancySorter = vacancySorter
                 )
             }
         ).flow

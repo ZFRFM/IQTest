@@ -44,7 +44,7 @@ fun SortDialog(
                     style = MaterialTheme.typography.titleMedium
                 )
                 VacancySorterItem(
-                    sorterName = "По релевантности",
+                    sorterName = VacancySorter.RelevanceSort.sorterName,
                     selected = currentVacancySorter is VacancySorter.RelevanceSort,
                     onClick = {
                         onVacancySorterChange(VacancySorter.RelevanceSort)
@@ -52,7 +52,7 @@ fun SortDialog(
                     }
                 )
                 VacancySorterItem(
-                    sorterName = "По дате публикации",
+                    sorterName = VacancySorter.DateSort.sorterName,
                     selected = currentVacancySorter is VacancySorter.DateSort,
                     onClick = {
                         onVacancySorterChange(VacancySorter.DateSort)

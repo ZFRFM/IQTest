@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import ru.faimizufarov.worker.data.models.VacancyResponse
 import ru.faimizufarov.worker.data.network.AppApiInterface
+import ru.faimizufarov.worker.vacancy.models.VacancySorter
 
 class VacancyPagingSource(
     private val appApiInterface: AppApiInterface,
@@ -12,6 +13,7 @@ class VacancyPagingSource(
     private val employment: String?,
     private val schedule: String?,
     private val workFormat: String?,
+    private val vacancySorter: VacancySorter
 ): PagingSource<Int, VacancyResponse>() {
     override fun getRefreshKey(state: PagingState<Int, VacancyResponse>) =
         state.anchorPosition?.let { position ->
@@ -29,7 +31,8 @@ class VacancyPagingSource(
                 experience = experience,
                 employment = employment,
                 schedule = schedule,
-                workFormat = workFormat
+                workFormat = workFormat,
+                orderBy = vacancySorter.id
             )
             val vacancies = response.vacancies
 
