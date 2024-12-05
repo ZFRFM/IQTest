@@ -11,7 +11,7 @@ import ru.faimizufarov.worker.data.paging.VacancyPagingSource
 class VacancyRepository {
     private val api = AppApi.retrofitService
 
-    fun getVacanciesFlow(): Flow<PagingData<VacancyResponse>> =
+    fun getVacanciesFlow(searchText: String?): Flow<PagingData<VacancyResponse>> =
         Pager(
             config = PagingConfig(
                 pageSize = 8,
@@ -19,6 +19,11 @@ class VacancyRepository {
                 initialLoadSize = 8,
                 enablePlaceholders = true
             ),
-            pagingSourceFactory = { VacancyPagingSource(api) }
+            pagingSourceFactory = {
+                VacancyPagingSource(
+                    appApiInterface = api,
+                    searchText = searchText
+                )
+            }
         ).flow
 }

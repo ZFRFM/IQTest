@@ -6,8 +6,15 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -22,14 +29,28 @@ class VacancyViewModel
     @Inject constructor(
         private val vacancyRepository: VacancyRepository
     ): ViewModel() {
-        val vacanciesFlow: Flow<PagingData<VacancyCompose>> =
-            vacancyRepository.getVacanciesFlow()
-                .map { pagingData ->
-                    pagingData.map { vacancyResponse ->
-                        vacancyResponse.toVacancyCompose()
-                    }
+    private val _searchText = MutableStateFlow<String?>(null)
+    val searchText: StateFlow<String?> = _searchText
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val vacanciesFlow: Flow<PagingData<VacancyCompose>> =
+        _searchText
+            .flatMapLatest { searchText ->
+                vacancyRepository.getVacanciesFlow(searchText = searchText)
+            }
+            .map { pagingData ->
+                pagingData.map { vacancyResponse ->
+                    vacancyResponse.toVacancyCompose()
                 }
-                .cachedIn(viewModelScope)
+            }
+            .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
+            .cachedIn(viewModelScope)
+
+    fun updateSearchText(text: String) {
+        viewModelScope.launch {
+            _searchText.value = text
+        }
+    }
 
     private fun VacancyResponse.toVacancyCompose() = VacancyCompose(
         vacancyName = vacancyName,

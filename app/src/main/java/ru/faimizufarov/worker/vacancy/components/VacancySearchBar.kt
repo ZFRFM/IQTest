@@ -22,23 +22,20 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.faimizufarov.worker.R
+import ru.faimizufarov.worker.theme.WorkerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VacancySearchBar(
     modifier: Modifier = Modifier,
+    searchText: String,
     onSearch: (String) -> Unit = {},
     onFilterClick: () -> Unit = {},
     onSortClick: () -> Unit = {}
 ) {
-    var searchText by remember { mutableStateOf("") }
-
     TextField(
         value = searchText,
-        onValueChange = {
-            searchText = it
-            onSearch(it)
-        },
+        onValueChange = { onSearch(it) },
         modifier = Modifier
             .padding(horizontal = 16.dp)
             .padding(bottom = 16.dp)
@@ -87,7 +84,10 @@ fun VacancySearchBar(
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewVacancyScreenBar() {
-    ru.faimizufarov.worker.theme.WorkerTheme {
-        VacancySearchBar()
+    WorkerTheme {
+        VacancySearchBar(
+            modifier = Modifier,
+            searchText = "check"
+        )
     }
 }

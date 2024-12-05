@@ -7,6 +7,7 @@ import ru.faimizufarov.worker.data.models.ResultResponse
 interface AppApiInterface {
     @GET("vacancies")
     suspend fun getResult(
+        @Query("text") text: String? = null,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): ResultResponse
