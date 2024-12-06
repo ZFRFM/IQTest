@@ -1,5 +1,6 @@
 package ru.faimizufarov.worker.vacancy.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,8 +24,8 @@ fun FiltersScreen(
         FiltersScreenBase(
             filters = filters,
             availableFilters = dictionaries!!
-        ) { filterType, value ->
-            vacancyViewModel.updateFilters(filterType, value)
+        ) { filterType, filterId, filterName ->
+            vacancyViewModel.updateFilters(filterType, filterId, filterName)
         }
     } else {
         Column(

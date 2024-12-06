@@ -28,10 +28,10 @@ class VacancyPagingSource(
                 text = searchText,
                 page = currentPage,
                 perPage = params.loadSize,
-                experience = experience,
-                employment = employment,
-                schedule = schedule,
-                workFormat = workFormat,
+                experienceId = experience,
+                employmentId = employment,
+                scheduleId = schedule,
+                workFormatId = workFormat,
                 orderBy = vacancySorter.id
             )
             val vacancies = response.vacancies

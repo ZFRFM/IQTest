@@ -11,10 +11,10 @@ interface AppApiInterface {
         @Query("text") text: String? = null,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
-        @Query("experience") experience: String? = null,
-        @Query("employment") employment: String? = null,
-        @Query("schedule") schedule: String? = null,
-        @Query("work_format") workFormat: String? = null,
+        @Query("experience") experienceId: String? = null,
+        @Query("employment") employmentId: String? = null,
+        @Query("schedule") scheduleId: String? = null,
+        @Query("work_format") workFormatId: String? = null,
         @Query("order_by") orderBy: String
     ): ResultResponse
 

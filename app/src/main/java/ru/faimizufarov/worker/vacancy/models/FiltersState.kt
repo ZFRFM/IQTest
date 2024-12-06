@@ -1,10 +1,15 @@
 package ru.faimizufarov.worker.vacancy.models
 
+import ru.faimizufarov.worker.data.models.Employment
+import ru.faimizufarov.worker.data.models.Experience
+import ru.faimizufarov.worker.data.models.Schedule
+import ru.faimizufarov.worker.data.models.WorkFormat
+
 data class FiltersState(
-    val experience: String? = null,
-    val employment: String? = null,
-    val schedule: String? = null,
-    val workFormat: String? = null
+    val experience: Experience? = null,
+    val employment: Employment? = null,
+    val schedule: Schedule? = null,
+    val workFormat: WorkFormat? = null
 )
 
 enum class FilterType(
