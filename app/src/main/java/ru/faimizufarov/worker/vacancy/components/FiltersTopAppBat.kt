@@ -22,7 +22,9 @@ import ru.faimizufarov.worker.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FilterTopAppBar() {
+fun FiltersTopAppBar(
+    onClose: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -35,7 +37,7 @@ fun FilterTopAppBar() {
         },
         navigationIcon = {
             IconButton(
-                onClick = {  },
+                onClick = { onClose() },
                 modifier = Modifier
                     .size(48.dp)
                     .padding(
@@ -46,7 +48,7 @@ fun FilterTopAppBar() {
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Меню",
+                    contentDescription = "Закрыть",
                     modifier = Modifier
                 )
             }
@@ -72,6 +74,6 @@ fun FilterTopAppBar() {
 @Composable
 fun PreviewFilterTopAppBar() {
     ru.faimizufarov.worker.theme.WorkerTheme {
-        FilterTopAppBar()
+        FiltersTopAppBar {}
     }
 }

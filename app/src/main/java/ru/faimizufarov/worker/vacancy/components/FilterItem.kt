@@ -1,6 +1,8 @@
 package ru.faimizufarov.worker.vacancy.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -8,8 +10,10 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,35 +29,36 @@ fun FilterItem(
     filterName: String,
     filters: List<String>,
     selectedFilter: String?,
-    onFilterSelected: (String) -> Unit
+    onFilterSelected: (String?) -> Unit
 ) {
-    val localSelectedFilter = rememberSaveable{
-        selectedFilter ?: "Select $filterName"
-    }
     var expandedDropdownMenu by rememberSaveable { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
+        modifier = Modifier.padding(top = 8.dp)
     ) {
         Text(
             text = filterName,
-            modifier = Modifier.padding(bottom = 8.dp),
+            modifier = Modifier.padding(bottom = 4.dp),
             fontSize = 20.sp,
             color = Color(0xFF1A1A1F)
         )
 
         TextField(
-            value = localSelectedFilter,
+            value = selectedFilter ?: filterName,
             onValueChange = {},
-            label = { Text(
-                text = filterName,
-                color = Color(0xFF8E8E8E)
-            ) },
+            modifier = Modifier
+                .clickable { expandedDropdownMenu = !expandedDropdownMenu }
+                .fillMaxWidth(),
+            readOnly = true,
             trailingIcon = {
                 IconButton(onClick = { expandedDropdownMenu = !expandedDropdownMenu }) {
                     Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
                 }
-            }
+            },
+            colors = TextFieldDefaults.colors(
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent
+            )
         )
 
         DropdownMenu(

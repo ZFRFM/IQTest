@@ -12,15 +12,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import ru.faimizufarov.worker.theme.WorkerTheme
+import ru.faimizufarov.worker.navigation.NavItems
 import ru.faimizufarov.worker.vacancy.components.VacancyScreenBase
 import ru.faimizufarov.worker.vacancy.components.VacancySearchBar
 
 @Composable
 fun VacancyScreen(
+    navController: NavController,
     vacancyViewModel: VacancyViewModel = hiltViewModel()
 ) {
     val vacancies = vacancyViewModel.vacanciesFlow.collectAsLazyPagingItems()
@@ -38,6 +39,7 @@ fun VacancyScreen(
             modifier = Modifier,
             searchText = searchText.orEmpty(),
             onSearch = { vacancyViewModel.updateSearchText(it) },
+            onFilterClick = { navController.navigate(NavItems.FILTERS) },
             onSortClick = { isSortDialogVisible = true }
         )
 
@@ -55,13 +57,5 @@ fun VacancyScreen(
                 onDismissRequest = { isSortDialogVisible = false }
             )
         }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewHiringScreen() {
-    WorkerTheme {
-        VacancyScreen()
     }
 }

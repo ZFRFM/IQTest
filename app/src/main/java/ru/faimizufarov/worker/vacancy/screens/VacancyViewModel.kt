@@ -10,6 +10,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -19,10 +20,12 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import ru.faimizufarov.worker.data.models.FiltersResponse
 import ru.faimizufarov.worker.data.models.Salary
 import ru.faimizufarov.worker.data.models.VacancyResponse
 import ru.faimizufarov.worker.data.repository.VacancyRepository
-import ru.faimizufarov.worker.vacancy.models.Filters
+import ru.faimizufarov.worker.vacancy.models.FilterType
+import ru.faimizufarov.worker.vacancy.models.FiltersState
 import ru.faimizufarov.worker.vacancy.models.VacancyCompose
 import ru.faimizufarov.worker.vacancy.models.VacancySorter
 import javax.inject.Inject
@@ -36,11 +39,18 @@ class VacancyViewModel
     private val _searchText = MutableStateFlow<String?>(null)
     val searchText = _searchText.asStateFlow()
 
-    private val _filters = MutableStateFlow(Filters())
+    private val _filters = MutableStateFlow(FiltersState())
     val filters = _filters.asStateFlow()
+
+    private val _dictionaries = MutableStateFlow<FiltersResponse?>(null)
+    val dictionaries: StateFlow<FiltersResponse?> = _dictionaries
 
     private val _vacancySorter = MutableStateFlow<VacancySorter>(VacancySorter.RelevanceSort)
     val vacancySorter = _vacancySorter.asStateFlow()
+
+    init {
+        fetchDictionaries()
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val vacanciesFlow: Flow<PagingData<VacancyCompose>> =
@@ -73,9 +83,21 @@ class VacancyViewModel
         }
     }
 
-    fun updateFilters(newFilters: Filters) {
+    fun updateFilters(filterType: FilterType, value: String?) {
         viewModelScope.launch {
-            _filters.value = newFilters
+            val updatedFilters = when (filterType) {
+                FilterType.EXPERIENCE -> _filters.value.copy(experience = value)
+                FilterType.EMPLOYMENT -> _filters.value.copy(employment = value)
+                FilterType.SCHEDULE -> _filters.value.copy(schedule = value)
+                FilterType.WORK_FORMAT -> _filters.value.copy(workFormat = value)
+            }
+            _filters.value = updatedFilters
+        }
+    }
+
+    fun fetchDictionaries() {
+        viewModelScope.launch {
+            _dictionaries.value = vacancyRepository.getFilters()
         }
     }
 
